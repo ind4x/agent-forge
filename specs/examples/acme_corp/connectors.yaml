@@ -1,0 +1,19 @@
+connectors:
+  github:
+    name: "github"
+    auth_type: "bearer_token"
+    rate_limit_per_minute: 80
+    required_env_vars:
+      - "GITHUB_TOKEN"
+    endpoints:
+      api_url: "https://api.github.com"
+
+  telegram_bot:
+    name: "telegram_bot"
+    auth_type: "api_key"
+    rate_limit_per_minute: 30
+    required_env_vars:
+      - "TELEGRAM_BOT_TOKEN"
+      - "TELEGRAM_ADMIN_CHAT_ID"
+    endpoints:
+      webhook_url: "https://api.telegram.org"

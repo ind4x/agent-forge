@@ -1,0 +1,40 @@
+roles:
+  associate_attorney:
+    name: "Associate Attorney"
+    description: "Legal associate handling legal research, drafting, and client intake"
+    can_trigger:
+      - "legal_conflict_checker"
+      - "procedural_deadline_calculator"
+      - "case_dossier_lookup"
+      - "legal_code_rag_search"
+      - "fee_convention_generator"
+    forbidden:
+      - "sign_fee_convention"
+      - "file_court_action"
+
+  managing_partner:
+    name: "Managing Partner"
+    description: "Senior partner with sole authority to validate fee conventions and legal actions"
+    can_trigger:
+      - "*"
+    forbidden: []
+
+  finance_lead:
+    name: "Finance Lead"
+    description: "Legal practice accountant responsible for trust accounting and billing"
+    can_trigger:
+      - "reconcile_invoices"
+      - "execute_vendor_payout"
+    forbidden:
+      - "sign_fee_convention"
+    spending_limit: 10000.00
+
+segregation_of_duties:
+  - action: "sign_fee_convention"
+    creator_cannot_approve: true
+    required_approvers:
+      - "managing_partner"
+  - action: "execute_vendor_payout"
+    creator_cannot_approve: true
+    required_approvers:
+      - "finance_lead"

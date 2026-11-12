@@ -1,0 +1,9 @@
+name: "Acme Corp"
+slug: "acme-corp"
+domain: "agents.acme-corp.internal"
+timezone: "Europe/Paris"
+hitl_channel: "telegram"
+hitl_default_approver: "tech_lead"
+thresholds:
+  max_autonomous_refund_eur: 50.00
+  payout_approval_threshold_eur: 1000.00

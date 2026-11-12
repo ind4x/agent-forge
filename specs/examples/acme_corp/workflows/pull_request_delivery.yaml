@@ -1,0 +1,37 @@
+name: "pull_request_delivery"
+description: "End-to-end automation of code audit, test suite pass, peer review pause, and deployment"
+timeout_hours: 48.0
+initial_state: "verify_code"
+states:
+  verify_code:
+    name: "verify_code"
+    state_type: "autonomous"
+    on_entry_tool: "test_runner_sandbox"
+    transitions:
+      - condition: "tests_passed"
+        target: "awaiting_approval"
+      - condition: "tests_failed"
+        target: "verification_failed"
+
+  awaiting_approval:
+    name: "awaiting_approval"
+    state_type: "human_pause"
+    on_entry_tool: "deploy_production"
+    timeout_hours: 24.0
+    on_timeout_target: "verification_failed"
+    resume_on_event: "hitl_approval_received"
+    transitions:
+      - condition: "approved"
+        target: "deployed"
+      - condition: "rejected"
+        target: "verification_failed"
+
+  deployed:
+    name: "deployed"
+    state_type: "terminal"
+    transitions: []
+
+  verification_failed:
+    name: "verification_failed"
+    state_type: "terminal"
+    transitions: []

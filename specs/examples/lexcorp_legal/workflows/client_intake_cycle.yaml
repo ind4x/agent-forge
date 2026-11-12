@@ -1,0 +1,37 @@
+name: "client_intake_cycle"
+description: "Intake of new prospective client with mandatory conflict of interest screening"
+timeout_hours: 24.0
+initial_state: "screen_conflict"
+states:
+  screen_conflict:
+    name: "screen_conflict"
+    state_type: "autonomous"
+    on_entry_tool: "legal_conflict_checker"
+    transitions:
+      - condition: "clearance_approved"
+        target: "awaiting_partner_signature"
+      - condition: "conflict_detected"
+        target: "intake_declined"
+
+  awaiting_partner_signature:
+    name: "awaiting_partner_signature"
+    state_type: "human_pause"
+    on_entry_tool: "fee_convention_generator"
+    timeout_hours: 24.0
+    on_timeout_target: "intake_declined"
+    resume_on_event: "hitl_approval_received"
+    transitions:
+      - condition: "approved"
+        target: "onboarded"
+      - condition: "rejected"
+        target: "intake_declined"
+
+  onboarded:
+    name: "onboarded"
+    state_type: "terminal"
+    transitions: []
+
+  intake_declined:
+    name: "intake_declined"
+    state_type: "terminal"
+    transitions: []

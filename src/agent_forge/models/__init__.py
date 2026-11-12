@@ -1,0 +1,33 @@
+from agent_forge.models.manifest import (
+    CompanySpec,
+    RoleDefinition,
+    SegregationOfDutiesRule,
+    OrgMatrix,
+    EntitySource,
+    DataSourceMap,
+    WorkflowTransition,
+    WorkflowStateType,
+    WorkflowState,
+    WorkflowSaga,
+    ConnectorDefinition,
+    ConnectorsConfig,
+    CompanyManifest,
+    HITLChannel,
+)
+
+__all__ = [
+    "CompanySpec",
+    "RoleDefinition",
+    "SegregationOfDutiesRule",
+    "OrgMatrix",
+    "EntitySource",
+    "DataSourceMap",
+    "WorkflowTransition",
+    "WorkflowStateType",
+    "WorkflowState",
+    "WorkflowSaga",
+    "ConnectorDefinition",
+    "ConnectorsConfig",
+    "CompanyManifest",
+    "HITLChannel",
+]

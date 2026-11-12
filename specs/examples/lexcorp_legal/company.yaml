@@ -1,0 +1,9 @@
+name: "LexCorp Legal"
+slug: "lexcorp-legal"
+domain: "lexcorp-legal.com"
+timezone: "Europe/Paris"
+hitl_channel: "webhook"
+hitl_default_approver: "managing_partner"
+thresholds:
+  max_autonomous_refund_eur: 100.00
+  payout_approval_threshold_eur: 5000.00

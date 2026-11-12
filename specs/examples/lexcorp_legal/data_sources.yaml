@@ -1,0 +1,15 @@
+entities:
+  git_repository:
+    entity_name: "git_repository"
+    source_of_truth: "github_enterprise"
+    secondary_reads:
+      - "local_mirror"
+    write_policy: "strict_api_only"
+    conflict_resolution: "source_wins"
+
+  invoices:
+    entity_name: "invoices"
+    source_of_truth: "postgresql_ledger"
+    secondary_reads: []
+    write_policy: "append_only"
+    conflict_resolution: "source_wins"

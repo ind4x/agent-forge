@@ -1,0 +1,39 @@
+roles:
+  developer:
+    name: "Developer"
+    description: "Software engineer responsible for writing code and running tests"
+    can_trigger:
+      - "git_diff_inspector"
+      - "test_runner_sandbox"
+      - "ast_code_auditor"
+      - "git_commit_maker"
+    forbidden:
+      - "deploy_production"
+      - "execute_vendor_payout"
+
+  tech_lead:
+    name: "Tech Lead"
+    description: "Lead architect with authorization to approve production releases"
+    can_trigger:
+      - "*"
+    forbidden: []
+
+  finance_lead:
+    name: "Finance Lead"
+    description: "Accountant responsible for invoices and banking payouts"
+    can_trigger:
+      - "reconcile_invoices"
+      - "execute_vendor_payout"
+    forbidden:
+      - "deploy_production"
+    spending_limit: 10000.00
+
+segregation_of_duties:
+  - action: "deploy_production"
+    creator_cannot_approve: true
+    required_approvers:
+      - "tech_lead"
+  - action: "execute_vendor_payout"
+    creator_cannot_approve: true
+    required_approvers:
+      - "finance_lead"

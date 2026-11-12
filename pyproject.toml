@@ -1,0 +1,30 @@
+[project]
+name = "agent-forge"
+version = "0.1.0"
+description = "Enterprise multi-agent architecture compiler and conversational runtime"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Youssef Fellah" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "typer>=0.12.0",
+    "pydantic>=2.7.0",
+    "pyyaml>=6.0.1",
+    "jinja2>=3.1.3",
+    "rich>=13.7.0",
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+agent-forge = "agent_forge:main"
+
+[build-system]
+requires = ["uv_build>=0.12.24,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
